@@ -229,7 +229,7 @@ $script:Xaml = @'
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="番茄钟" Width="380" SizeToContent="Height"
         WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize"
-        Background="#2B2B2B" FontFamily="Microsoft YaHei UI" UseLayoutRounding="True">
+        Background="#4A4A4A" FontFamily="Microsoft YaHei UI" UseLayoutRounding="True">
   <Window.TaskbarItemInfo>
     <TaskbarItemInfo/>
   </Window.TaskbarItemInfo>
@@ -286,7 +286,7 @@ $script:Xaml = @'
       <Button x:Name="BtnReset" Content="重置" Style="{StaticResource Btn}"/>
     </UniformGrid>
 
-    <Border Background="#383838" CornerRadius="12" Margin="0,24,0,0" Padding="16,12">
+    <Border Background="#565656" CornerRadius="12" Margin="0,24,0,0" Padding="16,12">
       <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
         <Ellipse Width="12" Height="12" Fill="#E5484D" VerticalAlignment="Center" Margin="0,1,8,0"/>
         <TextBlock x:Name="StatsText" Text="今日完成 0 个番茄" FontSize="14" Foreground="#C9C9DA"/>

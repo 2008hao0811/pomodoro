@@ -127,7 +127,7 @@ function Update-Dots {
     1..4 | ForEach-Object {
         $dot = $script:Window.FindName("Dot$_")
         if ($_ -le $filled) { $dot.Fill = Get-Brush $script:Theme[$script:Mode].Color }
-        else                { $dot.Fill = Get-Brush '#33334D' }
+        else                { $dot.Fill = Get-Brush '#D9D9D9' }
     }
 }
 
@@ -229,7 +229,7 @@ $script:Xaml = @'
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="番茄钟" Width="380" SizeToContent="Height"
         WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize"
-        Background="#4A4A4A" FontFamily="Microsoft YaHei UI" UseLayoutRounding="True">
+        Background="#FFFFFF" FontFamily="Microsoft YaHei UI" UseLayoutRounding="True">
   <Window.TaskbarItemInfo>
     <TaskbarItemInfo/>
   </Window.TaskbarItemInfo>
@@ -239,7 +239,7 @@ $script:Xaml = @'
       <Setter Property="FontSize" Value="16"/>
       <Setter Property="FontWeight" Value="SemiBold"/>
       <Setter Property="Cursor" Value="Hand"/>
-      <Setter Property="Background" Value="#3A3A55"/>
+      <Setter Property="Background" Value="#5F5F5F"/>
       <Setter Property="Template">
         <Setter.Value>
           <ControlTemplate TargetType="Button">
@@ -262,7 +262,7 @@ $script:Xaml = @'
   <StackPanel Margin="28,24,28,22">
     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
       <Ellipse Width="14" Height="14" Fill="#E5484D" VerticalAlignment="Center" Margin="0,1,9,0"/>
-      <TextBlock Text="番茄钟" FontSize="19" FontWeight="Bold" Foreground="#EDEDF5"/>
+      <TextBlock Text="番茄钟" FontSize="19" FontWeight="Bold" Foreground="#1F1F1F"/>
     </StackPanel>
 
     <TextBlock x:Name="PhaseLabel" Text="专注时间" FontSize="15" Margin="0,26,0,0"
@@ -271,14 +271,14 @@ $script:Xaml = @'
                Margin="0,2,0,0" HorizontalAlignment="Center" Foreground="#E5484D"/>
 
     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,14,0,0">
-      <Ellipse x:Name="Dot1" Width="13" Height="13" Margin="7,0" Fill="#33334D"/>
-      <Ellipse x:Name="Dot2" Width="13" Height="13" Margin="7,0" Fill="#33334D"/>
-      <Ellipse x:Name="Dot3" Width="13" Height="13" Margin="7,0" Fill="#33334D"/>
-      <Ellipse x:Name="Dot4" Width="13" Height="13" Margin="7,0" Fill="#33334D"/>
+      <Ellipse x:Name="Dot1" Width="13" Height="13" Margin="7,0" Fill="#D9D9D9"/>
+      <Ellipse x:Name="Dot2" Width="13" Height="13" Margin="7,0" Fill="#D9D9D9"/>
+      <Ellipse x:Name="Dot3" Width="13" Height="13" Margin="7,0" Fill="#D9D9D9"/>
+      <Ellipse x:Name="Dot4" Width="13" Height="13" Margin="7,0" Fill="#D9D9D9"/>
     </StackPanel>
 
     <TextBlock x:Name="HintText" Text="准备好了就开始吧" FontSize="13" Margin="0,16,0,0"
-               Foreground="#8B8BA3" HorizontalAlignment="Center"/>
+               Foreground="#757575" HorizontalAlignment="Center"/>
 
     <UniformGrid Columns="3" Margin="0,20,0,0">
       <Button x:Name="BtnStart" Content="开始" Style="{StaticResource Btn}" Margin="0,0,8,0"/>
@@ -286,10 +286,10 @@ $script:Xaml = @'
       <Button x:Name="BtnReset" Content="重置" Style="{StaticResource Btn}"/>
     </UniformGrid>
 
-    <Border Background="#565656" CornerRadius="12" Margin="0,24,0,0" Padding="16,12">
+    <Border Background="#F0F0F0" CornerRadius="12" Margin="0,24,0,0" Padding="16,12">
       <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
         <Ellipse Width="12" Height="12" Fill="#E5484D" VerticalAlignment="Center" Margin="0,1,8,0"/>
-        <TextBlock x:Name="StatsText" Text="今日完成 0 个番茄" FontSize="14" Foreground="#C9C9DA"/>
+        <TextBlock x:Name="StatsText" Text="今日完成 0 个番茄" FontSize="14" Foreground="#3A3A3A"/>
       </StackPanel>
     </Border>
   </StackPanel>

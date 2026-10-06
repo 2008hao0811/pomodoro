@@ -1,4 +1,4 @@
-<#
+﻿<#
   new-project.ps1 — 一键新建项目脚手架
   用法: powershell -NoProfile -ExecutionPolicy Bypass -File new-project.ps1 -Name 项目名 [-Path 目标目录]
   示例: powershell -File new-project.ps1 -Name my-app -Path D:\code

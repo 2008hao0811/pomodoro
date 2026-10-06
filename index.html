@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="梅西与C罗——绝代双骄，一个时代的两座丰碑。回顾两位传奇的生涯数据、荣誉与经典对决。" />
+<title>绝代双骄 · 梅西 & C罗 | 中文博客</title>
+<style>
+  :root {
+    --bg: #0b0e17;
+    --bg-soft: #121724;
+    --card: #161c2e;
+    --gold: #d4af37;
+    --gold-soft: #e8c96a;
+    --text: #e8eaf0;
+    --muted: #9aa3b8;
+    --messi: #2b7cd3;
+    --ronaldo: #c8343c;
+    --line: rgba(212, 175, 55, 0.18);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "Segoe UI", sans-serif;
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  a { color: var(--gold-soft); text-decoration: none; }
+
+  /* ---------- 导航 ---------- */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 6vw;
+    height: 64px;
+    background: rgba(11, 14, 23, 0.75);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav .logo {
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: var(--gold-soft);
+  }
+  .nav .logo span { color: var(--text); }
+  .nav .links { display: flex; gap: 26px; }
+  .nav .links a {
+    color: var(--muted);
+    font-size: 0.92rem;
+    transition: color .2s;
+  }
+  .nav .links a:hover { color: var(--gold-soft); }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 6vw 80px;
+    background:
+      radial-gradient(60% 50% at 20% 30%, rgba(43, 124, 211, 0.16), transparent 60%),
+      radial-gradient(60% 50% at 80% 30%, rgba(200, 52, 60, 0.16), transparent 60%),
+      radial-gradient(50% 40% at 50% 90%, rgba(212, 175, 55, 0.10), transparent 60%),
+      var(--bg);
+  }
+  .hero .badge {
+    display: inline-block;
+    padding: 6px 18px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--gold-soft);
+    font-size: 0.82rem;
+    letter-spacing: 3px;
+    margin-bottom: 26px;
+  }
+  .hero h1 {
+    font-size: clamp(2.4rem, 7vw, 5rem);
+    font-weight: 900;
+    line-height: 1.15;
+    letter-spacing: 2px;
+  }
+  .hero h1 .m { color: var(--messi); }
+  .hero h1 .r { color: var(--ronaldo); }
+  .hero h1 .vs {
+    color: var(--gold);
+    font-weight: 300;
+    font-size: 0.55em;
+    margin: 0 0.25em;
+    vertical-align: middle;
+  }
+  .hero .subtitle {
+    max-width: 720px;
+    margin-top: 22px;
+    color: var(--muted);
+    font-size: 1.1rem;
+  }
+  .hero .scroll-hint {
+    margin-top: 60px;
+    color: var(--muted);
+    font-size: 0.85rem;
+    animation: float 2.4s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+  }
+
+  /* ---------- 通用区块 ---------- */
+  section { padding: 96px 6vw; }
+  .wrap { max-width: 1080px; margin: 0 auto; }
+  .section-title {
+    font-size: clamp(1.6rem, 4vw, 2.3rem);
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+  }
+  .section-title .accent { color: var(--gold); }
+  .section-lead {
+    text-align: center;
+    color: var(--muted);
+    max-width: 640px;
+    margin: 0 auto 56px;
+  }
+
+  /* ---------- 引言 ---------- */
+  .intro .quote {
+    position: relative;
+    padding: 48px 40px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    font-size: 1.25rem;
+    color: var(--text);
+    margin-bottom: 40px;
+  }
+  .intro .quote::before {
+    content: "“";
+    position: absolute;
+    top: -8px; left: 24px;
+    font-size: 5rem;
+    color: var(--gold);
+    opacity: 0.4;
+    line-height: 1;
+  }
+  .intro p { color: var(--muted); margin-bottom: 18px; }
+
+  /* ---------- 人物卡片 ---------- */
+  .players {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+  @media (max-width: 760px) { .players { grid-template-columns: 1fr; } }
+  .player-card {
+    position: relative;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 40px 34px;
+    overflow: hidden;
+    transition: transform .25s, border-color .25s;
+  }
+  .player-card:hover { transform: translateY(-6px); }
+  .player-card.messi:hover { border-color: var(--messi); }
+  .player-card.ronaldo:hover { border-color: var(--ronaldo); }
+  .player-card .top {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  .player-card .avatar {
+    width: 76px; height: 76px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .player-card.messi .avatar { background: linear-gradient(135deg, #2b7cd3, #7f3fb0); }
+  .player-card.ronaldo .avatar { background: linear-gradient(135deg, #c8343c, #e8732a); }
+  .player-card .name { font-size: 1.7rem; font-weight: 900; }
+  .player-card .en { color: var(--muted); font-size: 0.85rem; letter-spacing: 1px; }
+  .player-card .tag {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+  .player-card.messi .tag { background: rgba(43,124,211,.15); color: #6fb0f5; }
+  .player-card.ronaldo .tag { background: rgba(200,52,60,.15); color: #f58a8f; }
+  .player-card p { color: var(--muted); font-size: 0.96rem; }
+
+  /* ---------- 数据对比 ---------- */
+  .stats { background: var(--bg-soft); }
+  .stat-block { margin-bottom: 34px; }
+  .stat-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+    color: var(--text);
+  }
+  .stat-label .val { font-weight: 700; }
+  .bar-track {
+    position: relative;
+    display: flex;
+    height: 40px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.04);
+  }
+  .bar {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    font-weight: 800;
+    font-size: 0.85rem;
+    color: #fff;
+    width: 0;
+    transition: width 1.2s cubic-bezier(.22,.8,.24,1);
+  }
+  .bar.messi { background: linear-gradient(90deg, #1f5fa8, #2b7cd3); }
+  .bar.ronaldo { background: linear-gradient(90deg, #8f262e, #c8343c); }
+  .bar.right { justify-content: flex-end; }
+  .stats-note { text-align: center; color: var(--muted); font-size: 0.8rem; margin-top: 40px; }
+
+  /* ---------- 荣誉 ---------- */
+  .trophy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 18px;
+  }
+  .trophy {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 24px 20px;
+    text-align: center;
+  }
+  .trophy .num { font-size: 2.4rem; font-weight: 900; color: var(--gold); }
+  .trophy .label { color: var(--muted); font-size: 0.9rem; margin-top: 4px; }
+
+  /* ---------- 时间线 ---------- */
+  .timeline { position: relative; max-width: 760px; margin: 0 auto; }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 24px; top: 0; bottom: 0;
+    width: 2px;
+    background: var(--line);
+  }
+  .t-item {
+    position: relative;
+    padding-left: 66px;
+    margin-bottom: 40px;
+  }
+  .t-item::before {
+    content: "";
+    position: absolute;
+    left: 17px; top: 6px;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 0 4px rgba(212,175,55,.18);
+  }
+  .t-item .year {
+    font-weight: 900;
+    font-size: 1.15rem;
+    color: var(--gold-soft);
+  }
+  .t-item h4 { font-size: 1.1rem; margin: 4px 0 6px; }
+  .t-item p { color: var(--muted); font-size: 0.94rem; }
+
+  /* ---------- 结语 ---------- */
+  .closing { text-align: center; background: var(--bg-soft); }
+  .closing p { max-width: 720px; margin: 0 auto 18px; color: var(--muted); }
+  .closing .big {
+    font-size: 1.4rem;
+    color: var(--text);
+    font-weight: 700;
+    line-height: 1.6;
+  }
+  .closing .big .m { color: var(--messi); }
+  .closing .big .r { color: var(--ronaldo); }
+
+  footer {
+    text-align: center;
+    padding: 40px 6vw;
+    color: var(--muted);
+    font-size: 0.82rem;
+    border-top: 1px solid var(--line);
+  }
+  footer .gold { color: var(--gold-soft); }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="logo">绝代<span>双骄</span></div>
+  <div class="links">
+    <a href="#intro">引言</a>
+    <a href="#players">双骄</a>
+    <a href="#stats">数据</a>
+    <a href="#trophies">荣誉</a>
+    <a href="#timeline">经典</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="badge">一个时代 · 两位传奇</div>
+  <h1><span class="m">梅西</span><span class="vs">VS</span><span class="r">C罗</span></h1>
+  <p class="subtitle">
+    他们不是对手，而是彼此成就的镜像。十多年的巅峰对决，把足球这项运动推向了从未有过的高度。
+    一个用天赋写诗，一个用意志铸剑——这就是属于我们的「绝代双骄」。
+  </p>
+  <div class="scroll-hint">↓ 向下滚动，走进他们的时代</div>
+</header>
+
+<section class="intro" id="intro">
+  <div class="wrap">
+    <h2 class="section-title">为什么是<span class="accent">绝代双骄</span></h2>
+    <div class="quote">
+      足球史上从不缺少巨星，却从未有两个人，能在同一条时间线上，把「史上最佳」的讨论持续了整整十五年。
+    </div>
+    <p>
+      莱昂内尔·梅西与克里斯蒂亚诺·罗纳尔多，一个来自阿根廷罗萨里奥的腼腆少年，一个来自葡萄牙马德拉岛的倔强男孩。
+      他们性格迥异、风格不同，却在同一个时代达到了无人企及的高度。
+    </p>
+    <p>
+      从西甲的国家德比，到欧冠决赛的舞台，再到金球奖的领奖台，两人的竞争跨越俱乐部、联赛与国家队的边界，
+      成为一代球迷共同的青春记忆。有人偏爱梅西的灵动与优雅，有人折服于 C罗 的自律与霸气——
+      但没有人能否认：正是因为有彼此，他们才成为了更好的自己。
+    </p>
+    <p>
+      这个博客，献给那段属于「绝代双骄」的黄金岁月。
+    </p>
+  </div>
+</section>
+
+<section id="players">
+  <div class="wrap">
+    <h2 class="section-title">两位<span class="accent">传奇</span></h2>
+    <p class="section-lead">截然不同的两个人，同样伟大的两个故事。</p>
+    <div class="players">
+      <article class="player-card messi">
+        <div class="top">
+          <div class="avatar">梅</div>
+          <div>
+            <div class="name">莱昂内尔·梅西</div>
+            <div class="en">Lionel Messi</div>
+          </div>
+        </div>
+        <span class="tag">天赋 · 灵动</span>
+        <p>
+          1987 年出生于阿根廷罗萨里奥。自幼展现惊人天赋，13 岁加入巴塞罗那拉玛西亚青训，
+          从此开启一段辉煌传奇。他脚下的皮球仿佛被施了魔法，人球合一的盘带、精准的直塞、
+          灵巧的挑射，让无数防守者望尘莫及。
+        </p>
+        <p style="margin-top:14px">
+          在巴萨与阿根廷国家队，他几乎赢得了所能赢得的一切，并于 2022 年卡塔尔世界杯圆梦，
+          捧起那座他魂牵梦萦的大力神杯，为「球王」二字写下最完整的注脚。
+        </p>
+      </article>
+
+      <article class="player-card ronaldo">
+        <div class="top">
+          <div class="avatar">罗</div>
+          <div>
+            <div class="name">克里斯蒂亚诺·罗纳尔多</div>
+            <div class="en">Cristiano Ronaldo</div>
+          </div>
+        </div>
+        <span class="tag">自律 · 力量</span>
+        <p>
+          1985 年出生于葡萄牙马德拉岛。他的成功并非天赋使然，而是近乎偏执的自律与永不言败的斗志铸就。
+          从曼联到皇马，他不断进化——闪电般的爆发力、势大力沉的射门、标志性的头球，
+          让他成为足坛历史第一射手。
+        </p>
+        <p style="margin-top:14px">
+          他率葡萄牙勇夺 2016 年欧洲杯与 2019 年首届欧国联冠军，用一次次绝境中的挺身而出，
+          诠释了什么叫「逆天改命」的领袖气质。
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="stats" id="stats">
+  <div class="wrap">
+    <h2 class="section-title">生涯数据<span class="accent">对比</span></h2>
+    <p class="section-lead">数字会老去，但他们的名字已刻进历史。</p>
+
+    <div class="stat-block">
+      <div class="stat-label"><span>俱乐部与国家队总进球</span><span class="val">梅西 ≈ 850 ｜ C罗 ≈ 900</span></div>
+      <div class="bar-track"><div class="bar messi" data-w="85">850+</div><div class="bar ronaldo right" data-w="90">900+</div></div>
+    </div>
+
+    <div class="stat-block">
+      <div class="stat-label"><span>金球奖</span><span class="val">梅西 8 ｜ C罗 5</span></div>
+      <div class="bar-track"><div class="bar messi" data-w="80">8 座</div><div class="bar ronaldo right" data-w="50">5 座</div></div>
+    </div>
+
+    <div class="stat-block">
+      <div class="stat-label"><span>欧冠冠军</span><span class="val">梅西 4 ｜ C罗 5</span></div>
+      <div class="bar-track"><div class="bar messi" data-w="40">4 座</div><div class="bar ronaldo right" data-w="50">5 座</div></div>
+    </div>
+
+    <div class="stat-block">
+      <div class="stat-label"><span>世界杯成绩</span><span class="val">梅西：冠军 ｜ C罗：殿军</span></div>
+      <div class="bar-track"><div class="bar messi" data-w="100">2022 冠军</div><div class="bar ronaldo right" data-w="45">2006 殿军</div></div>
+    </div>
+
+    <div class="stat-block">
+      <div class="stat-label"><span>国家队大赛冠军</span><span class="val">梅西：世界杯+2×美洲杯 ｜ C罗：欧洲杯+欧国联</span></div>
+      <div class="bar-track"><div class="bar messi" data-w="78">3 座</div><div class="bar ronaldo right" data-w="62">2 座</div></div>
+    </div>
+
+    <p class="stats-note">* 数据为职业生涯累计的近似值，截至 2026 年初；不同统计口径略有差异。</p>
+  </div>
+</section>
+
+<section id="trophies">
+  <div class="wrap">
+    <h2 class="section-title">荣誉<span class="accent">陈列室</span></h2>
+    <p class="section-lead">每一座奖杯背后，都是数不尽的汗水与坚持。</p>
+    <div class="trophy-grid">
+      <div class="trophy"><div class="num">8</div><div class="label">梅西 · 金球奖</div></div>
+      <div class="trophy"><div class="num">5</div><div class="label">C罗 · 金球奖</div></div>
+      <div class="trophy"><div class="num">1</div><div class="label">梅西 · 世界杯冠军</div></div>
+      <div class="trophy"><div class="num">5</div><div class="label">C罗 · 欧冠冠军</div></div>
+      <div class="trophy"><div class="num">4</div><div class="label">梅西 · 欧冠冠军</div></div>
+      <div class="trophy"><div class="num">1</div><div class="label">C罗 · 欧洲杯冠军</div></div>
+      <div class="trophy"><div class="num">2</div><div class="label">梅西 · 美洲杯冠军</div></div>
+      <div class="trophy"><div class="num">1</div><div class="label">C罗 · 欧国联冠军</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="timeline">
+  <div class="wrap">
+    <h2 class="section-title">经典<span class="accent">对决时刻</span></h2>
+    <p class="section-lead">那些让我们熬夜守候、心跳加速的夜晚。</p>
+    <div class="timeline">
+
+      <div class="t-item">
+        <div class="year">2008</div>
+        <h4>金球奖的第一次更替</h4>
+        <p>C罗 首次捧起金球奖，宣告属于自己的时代开启；一年后，梅西接过接力棒。此后十余年，金球奖几乎成了两人轮流坐庄的舞台。</p>
+      </div>
+
+      <div class="t-item">
+        <div class="year">2009 – 2018</div>
+        <h4>国家德比的黄金十年</h4>
+        <p>巴萨 vs 皇马，梅西 vs C罗。每一次相遇都是火星撞地球，两人在彼此的注视下疯狂进球，把 El Clásico 推向了世界第一德比。</p>
+      </div>
+
+      <div class="t-item">
+        <div class="year">2012</div>
+        <h4>梅西的「91 球」神话</h4>
+        <p>自然年 91 球，前无古人。面对如此疯狂的对手，C罗 也以连续多年 50+ 进球的恐怖输出予以回应。</p>
+      </div>
+
+      <div class="t-item">
+        <div class="year">2016</div>
+        <h4>C罗 的欧洲杯奇迹</h4>
+        <p>决赛中受伤离场的 C罗，在场边化身「第二教练」嘶吼指挥，葡萄牙历史性夺冠。他用另一种方式证明：领袖可以有很多种形态。</p>
+      </div>
+
+      <div class="t-item">
+        <div class="year">2021 – 2022</div>
+        <h4>梅西的加冕之路</h4>
+        <p>先夺美洲杯，再在卡塔尔世界杯上历经点球大战、决赛加时，最终捧起大力神杯。属于他的「球王」称号，就此尘埃落定。</p>
+      </div>
+
+      <div class="t-item">
+        <div class="year">2024</div>
+        <h4>C罗 的千球之路</h4>
+        <p>职业生涯总进球突破 900 大关，向着千球里程碑继续挺进。哪怕岁月流逝，他进球的渴望从未熄灭。</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="closing">
+  <div class="wrap">
+    <h2 class="section-title">写给<span class="accent">绝代双骄</span>时代</h2>
+    <p class="big">
+      感谢 <span class="m">梅西</span>，让我们相信天赋可以如此纯粹；
+      <br>
+      感谢 <span class="r">C罗</span>，让我们相信努力可以改写命运。
+    </p>
+    <p>
+      当若干年后，我们向下一代讲述这段往事，或许会忘了某一场比赛的比分，
+      但一定会记得——在那个年代，有两个人并肩而立，让「伟大」有了两种模样。
+    </p>
+    <p>
+      <strong style="color:var(--gold-soft)">绝代双骄，永不落幕。</strong>
+    </p>
+  </div>
+</section>
+
+<footer>
+  绝代双骄 · 梅西 & C罗 中文博客 &nbsp;|&nbsp; 献给所有热爱足球的人 <span class="gold">⚽</span>
+</footer>
+
+<script>
+  // 数据条滚动进入视口时动画展开
+  const bars = document.querySelectorAll('.bar');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const bar = entry.target;
+        bar.style.width = bar.dataset.w + '%';
+        io.unobserve(bar);
+      }
+    });
+  }, { threshold: 0.4 });
+
+  bars.forEach((bar) => io.observe(bar));
+
+  // 人物卡片淡入
+  const cards = document.querySelectorAll('.player-card');
+  const io2 = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = 1;
+        entry.target.style.transform = 'translateY(0)';
+        io2.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  cards.forEach((card) => {
+    card.style.opacity = 0;
+    card.style.transform = 'translateY(24px)';
+    card.style.transition = 'opacity .8s ease, transform .8s ease';
+    io2.observe(card);
+  });
+</script>
+
+</body>
+</html>

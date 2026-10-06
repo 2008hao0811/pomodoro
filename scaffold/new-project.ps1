@@ -9,6 +9,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 $here   = Split-Path -Parent $MyInvocation.MyCommand.Path
 $target = Join-Path $Path $Name
 
@@ -25,8 +26,8 @@ Copy-Item "$here\PERF.template.md"    (Join-Path $target "PERF.md")
 Copy-Item "$here\.vscode"             (Join-Path $target ".vscode") -Recurse
 
 # README 占位符替换
-$readme = (Get-Content "$here\README.template.md" -Raw).Replace("{{PROJECT_NAME}}", $Name)
-Set-Content (Join-Path $target "README.md") $readme -Encoding UTF8
+$readme = (Get-Content "$here\README.template.md" -Raw -Encoding UTF8).Replace("{{PROJECT_NAME}}", $Name)
+[System.IO.File]::WriteAllText((Join-Path $target "README.md"), $readme, (New-Object System.Text.UTF8Encoding($false)))
 
 # git 初始化（若 git 可用）
 $git = Get-Command git -ErrorAction SilentlyContinue

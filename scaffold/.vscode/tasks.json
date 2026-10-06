@@ -1,0 +1,23 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "git status",
+      "type": "shell",
+      "command": "git status --short",
+      "problemMatcher": []
+    },
+    {
+      "label": "git 提交",
+      "type": "shell",
+      "command": "git add -A && git commit -m \"update\"",
+      "problemMatcher": []
+    },
+    {
+      "label": "打开 README",
+      "type": "shell",
+      "command": "code README.md",
+      "problemMatcher": []
+    }
+  ]
+}

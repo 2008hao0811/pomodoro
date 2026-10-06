@@ -1,0 +1,48 @@
+# ---- OS / 编辑器 ----
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+.idea/
+
+# ---- Node ----
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+dist/
+build/
+.vite/
+*.tsbuildinfo
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ---- Go ----
+bin/
+vendor/
+
+# ---- Rust ----
+target/
+
+# ---- Java ----
+*.class
+target/
+
+# ---- env / 密钥（绝不提交）----
+.env
+.env.*
+*.local
+secrets/
+*.pem
+*.key
+
+# ---- 日志 ----
+*.log
+logs/
